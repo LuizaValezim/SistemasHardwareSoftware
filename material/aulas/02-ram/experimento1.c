@@ -32,3 +32,5 @@ int main() {
     
     return 0;
 }
+
+// lê do menos significativo para o mais significativo

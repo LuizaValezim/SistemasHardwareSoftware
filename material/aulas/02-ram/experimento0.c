@@ -16,3 +16,5 @@ int main() {
     
     return 0;
 }
+
+// o typedef union usa um espaço de memória compartilhado
