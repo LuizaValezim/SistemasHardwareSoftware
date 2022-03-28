@@ -19,7 +19,7 @@ theme:
 docs_dir: material
 site_dir: docs
 
-repo_url: https://github.com/insper/sistemashardwaresoftware
+repo_url: https://github.com/Insper/SistemasHardwareSoftware/
 repo_name: "sistemashardwaresoftware"
 site_url: https://insper.github.io/SistemasHardwareSoftware/
 
@@ -99,8 +99,8 @@ nav:
         - aulas/06-condicionais-funcoes/index.md
         - aulas/07-loops/index.md
         - aulas/08-variaveis-locais/index.md
-        # - aulas/09-arrays/index.md
-        # - aulas/10-revisao/index.md
+        - aulas/09-arrays/index.md
+        - aulas/10-revisao/index.md
         # - aulas/11-malloc/index.md
         # - aulas/12-tipos-de-dados/index.md
         # - aulas/12-linux-do-zero/index.md
