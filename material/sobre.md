@@ -18,12 +18,13 @@
 | 13/03 | 03-condicionais-funcoes | Github | 18/03 23h59 |
 | 16/03 | 04-loops | Github | 23/03 23h59 |
 | 21/03 | 05-variaveis-locais | Github | 25/03 23h59 |
+| 11/04 | 06-malloc | Github | 15/04 23h59 |
 
 
 # Provas
 
 - **Labs de C**: 18/02 (aula com Hashi).
-- **AI**: a definir
+- **AI**: 04/04/2022 (Segunda-feira) das 16h00 às 19h00 - Sala 114 prédio 2.
 - **AF**: a definir
 - **SUB**: a definir
 - **Delta**: a definir
