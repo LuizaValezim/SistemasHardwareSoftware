@@ -9,7 +9,7 @@ int *aloca_vetor(int n) {
 }
 
 void atribui(int *vetor, int n) {
-    for (int i = 0; i <= n; i++) { // problema!
+    for (int i = 0; i < n; i++) { // problema!
         vetor[i] = i;
     }
 }
@@ -20,10 +20,9 @@ int main(int argc, char *argv[]) {
 
     atribui(vetor, N);
 
-    for (i = 0; i <= N; i++) { // problema!
+    for (i = 0; i < N; i++) { // problema!
         printf("Elemento %d: %d\n", i+1, vetor[i]);
     }
-
 
     return 0;
 }

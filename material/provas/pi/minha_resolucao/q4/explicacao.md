@@ -1,0 +1,2 @@
+A função recebe um vetor, um inteiro e um ponteiro. Nela, há um loop que itera uma variável até o inteiro definido como argumento
+da função. A partir disso, ele vai comparando os itens do vetor, de um em um, para ver se algum deles é maior ou menor que o uma vetor. Se ele for maior ou igual, segue o loop, mas se não, ele, antes de seguir direto para o loop, muda o valor para onde o ponteiro do argumento para o item do vetor daquela iteração do loop, marcando junto em qual iteração isso ocorreu. Ao fim, ele retorna essa variável contadora que utilizamos no if.
