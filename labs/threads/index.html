@@ -1,0 +1,1130 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/threads/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.4">
+    
+    
+      
+        <title>K-Nearest Neighbors Classifier - Sistemas Hardware-Software - 2022/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#795649">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#k-nearest-neighbors-classifier" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2022/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2022/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2022/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              K-Nearest Neighbors Classifier
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2022/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2022/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2022/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        Entregas e Prazos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Aulas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Aulas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Aulas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        01 - Inteiros na CPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        02 - Representação de dados em RAM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        03 - Arquitetura x86-64
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        04 -  Funções
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        05 - Condicionais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        06 - Condicionais e funções
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        07 - Loops
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        08 - Variáveis locais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        09 - Array em Assembly
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-revisao/" class="md-nav__link">
+        10 - Revisão
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-malloc/" class="md-nav__link">
+        11 - Alocação Dinâmica de Memória
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        12 - Tipos abstratos de dados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-linux-do-zero/" class="md-nav__link">
+        13 - Linux do Zero
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-processos/" class="md-nav__link">
+        14 - Processos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-exec/" class="md-nav__link">
+        15 - Carregamento de programas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/16-entrada-saida/" class="md-nav__link">
+        16 - Entrada/Saída
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/17-sinais-I/" class="md-nav__link">
+        17 - Enviando sinais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/18-sinais-II/" class="md-nav__link">
+        18 - Capturando sinais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-threads-I/" class="md-nav__link">
+        19 - Concorrência e Threads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/20-sincronizacao/" class="md-nav__link">
+        20 - Sincronização com Mutex
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/21-semaforos/" class="md-nav__link">
+        21 - Semáforos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/22-semaforos-II/" class="md-nav__link">
+        22 - Semáforos II e Modelos de concorrência
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/23-questoes-de-revisao/" class="md-nav__link">
+        22 - Questões de revisão
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Labs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        Hackerlab
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processos/" class="md-nav__link">
+        Immortal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          K-Nearest Neighbors Classifier
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        K-Nearest Neighbors Classifier
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#onde-desenvolver" class="md-nav__link">
+    Onde desenvolver?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-e-o-que-entregar" class="md-nav__link">
+    Como e o que entregar?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-baixar-os-csvs" class="md-nav__link">
+    Onde baixar os CSVs?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-serei-avaliado" class="md-nav__link">
+    Como serei avaliado?
+  </a>
+  
+    <nav class="md-nav" aria-label="Como serei avaliado?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-i" class="md-nav__link">
+    Conceito I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-d" class="md-nav__link">
+    Conceito D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    Prazo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#onde-desenvolver" class="md-nav__link">
+    Onde desenvolver?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-e-o-que-entregar" class="md-nav__link">
+    Como e o que entregar?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-baixar-os-csvs" class="md-nav__link">
+    Onde baixar os CSVs?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-serei-avaliado" class="md-nav__link">
+    Como serei avaliado?
+  </a>
+  
+    <nav class="md-nav" aria-label="Como serei avaliado?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-i" class="md-nav__link">
+    Conceito I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-d" class="md-nav__link">
+    Conceito D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    Prazo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/Insper/SistemasHardwareSoftware/edit/master/docs/labs/threads.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="k-nearest-neighbors-classifier">K-Nearest Neighbors Classifier<a class="headerlink" href="#k-nearest-neighbors-classifier" title="Permanent link">&para;</a></h1>
+<p>O <strong>KNN</strong> (k-vizinhos mais próximos) é um método de aprendizado de máquina desenvolvido em 1951 que pode ser utilizado para classificação. A ideia do <strong>KNN</strong> é simples: com base na hipótese de que registros com resposta semelhante possuem características semelhantes, para classificar um novo registro, o <strong>KNN</strong> busca encontrar os <code>k</code> vizinhos mais semelhantes ao registro que se deseja classificar, decidindo pela classe com maior frequência.</p>
+<p><img alt="KNN Example" src="../knn.png" />
+Fonte: <em><a href="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final1_ibdm8a.png">http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final1_ibdm8a.png</a></em></p>
+<p>Neste lab, sua tarefa será utilizar os conceitos aprendidos sobre <strong>threads</strong> para acelerar o processo de predição de um programa que implementa o <strong>KNN</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Dica!</p>
+<p>Este é um laboratório de <strong>threads</strong>. De modo geral, os temas mais utilizados serão a criação e espera de <strong>threads</strong>, semáforos e/ou mutex. A ideia é apenas utilizar a parte de Machine Learning, sem necessidade de se aprofundar no <strong>KNN</strong>. Procure o professor caso tenha dúvidas!</p>
+</div>
+<p>A implementação do <strong>KNN</strong> já está disponível no seu repositório de atividades (<code>knn.h</code> e <code>knn.o</code>). Veja um exemplo do seu uso:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;knn.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Abre dataset de treinamento</span>
+<span class="w">    </span><span class="n">t_data</span><span class="w"> </span><span class="o">*</span><span class="n">data_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s">&quot;ex_10000-size_7-classes_15-features_train.csv&quot;</span><span class="p">);</span><span class="w">    </span>
+
+<span class="w">    </span><span class="c1">// Treina modelo</span>
+<span class="w">    </span><span class="n">t_knn_classifier</span><span class="w"> </span><span class="o">*</span><span class="n">knn_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knn_fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Aloca vetor para armazenar a predição</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="n">pred_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_train</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Para cada registro (linha da matriz) de treinamento, faz a predição</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">data_train</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">pred_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knn_predict</span><span class="p">(</span><span class="n">knn_model</span><span class="p">,</span><span class="w"> </span><span class="n">data_train</span><span class="o">-&gt;</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Performance do modelo em treinamento</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Accuracy score train:</span><span class="se">\t</span><span class="s">%.3f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">get_target</span><span class="p">(</span><span class="n">data_train</span><span class="p">),</span><span class="w"> </span><span class="n">pred_train</span><span class="p">,</span><span class="w"> </span><span class="n">data_train</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Abre os dados de teste</span>
+<span class="w">    </span><span class="n">t_data</span><span class="w"> </span><span class="o">*</span><span class="n">data_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s">&quot;ex_10000-size_7-classes_15-features_test.csv&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="n">pred_test</span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_test</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Para cada registro (linha da matriz) de teste, faz a predição</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">data_test</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">pred_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knn_predict</span><span class="p">(</span><span class="n">knn_model</span><span class="p">,</span><span class="w"> </span><span class="n">data_test</span><span class="o">-&gt;</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Performance do modelo nos dados de teste</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Accuracy score test:</span><span class="se">\t</span><span class="s">%.3f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">get_target</span><span class="p">(</span><span class="n">data_test</span><span class="p">),</span><span class="w"> </span><span class="n">pred_test</span><span class="p">,</span><span class="w"> </span><span class="n">data_test</span><span class="o">-&gt;</span><span class="n">n_rows</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<p>Perceba que esta versão de exemplo faz tudo de forma sequêncial, sem threads. Sua tarefa é melhorar este trabalho, recebendo argumentos da linha de comando e fazer as alterações necessárias para que o trabalho considere threads.</p>
+<h2 id="onde-desenvolver">Onde desenvolver?<a class="headerlink" href="#onde-desenvolver" title="Permanent link">&para;</a></h2>
+<p>Foi criado uma pasta <code>lab/03-knn</code> em seu repositório de entregas da disciplina. Crie um arquivo <code>classifier.c</code> para resolver seu lab!</p>
+<p>Para compilar, você pode utilizar:</p>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc -Wall -Wno-unused-result -g classifier.c knn.o -o classifier -lm -pthread 
+</code></pre></div>
+</div>
+
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Você pode querer alterar a estrutura de seu lab, criar um makefile ou compilar de forma diferente. Considere como <strong>obrigatório</strong> informar no <code>README.md</code> da pasta <code>lab/03-knn</code> como seu programa deve ser compilado.</p>
+</div>
+<h2 id="como-e-o-que-entregar">Como e o que entregar?<a class="headerlink" href="#como-e-o-que-entregar" title="Permanent link">&para;</a></h2>
+<p>A correção deste lab será manual (basta ter commit, não precisa fazer tag). Deixe no <code>README.md</code> um pequeno relatório explicando como compilar e executar seu programa, detalhes de implementação, além de um vídeo de sua solução funcionando (opcional, ver rubrica A).</p>
+<p>Quais detalhes de implementação:
+- Explique brevemente (um ou dois parágrafos) como você sincronizou as threads em cada conceito
+- Explique brevemente (um ou dois parágrafos) as chamadas de sistema utilizadas</p>
+<p>Escreva pensando em visitas futuras que ocorrerão ao seu repositório, para que outras pessoas entendam seu projeto.</p>
+<h2 id="onde-baixar-os-csvs">Onde baixar os CSVs?<a class="headerlink" href="#onde-baixar-os-csvs" title="Permanent link">&para;</a></h2>
+<p>Estão neste repositório, <a href="../csv.tar.xz">Clique Aqui!</a></p>
+<h2 id="como-serei-avaliado">Como serei avaliado?<a class="headerlink" href="#como-serei-avaliado" title="Permanent link">&para;</a></h2>
+<p>Implemente conforme os seguintes conceitos:</p>
+<h3 id="conceito-i">Conceito <strong>I</strong><a class="headerlink" href="#conceito-i" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa não compila</li>
+<li>O programa não executa</li>
+</ul>
+<h3 id="conceito-d">Conceito <strong>D</strong><a class="headerlink" href="#conceito-d" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implementou a rubrica C, mas o programa compila com warnings ou utiliza variáveis globais sem necessidade</li>
+</ul>
+<h3 id="conceito-c">Conceito <strong>C</strong><a class="headerlink" href="#conceito-c" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa recebe os seguintes argumentos na linha de comando<ul>
+<li><code>-k k_vizinhos</code>: informa o argumento do classificador, números de vizinhos a serem considerados. Este argumento será passado na função <code>t_knn_classifier *knn_fit(t_data *data, long k);</code></li>
+<li><code>-d path_train_csv</code>: informa o path para o arquivo CSV de treinamento</li>
+<li><code>-t path_test_csv</code>: informa o path para o arquivo CSV de teste</li>
+</ul>
+</li>
+<li>Seu programa deve treinar (função <code>fit</code>) o KNN (na main, pode ser sem criar nova thread)</li>
+<li>Seu programa deve fazer <code>predict</code> do KNN tanto da base de <strong>treino</strong> quanto de <strong>teste</strong>, mostrando a acurácia de cada uma delas</li>
+<li>Na etapa de <strong>predict</strong>, o <strong>predict</strong> deve obrigatoriamente utilizar threads. A thread deve fazer predict de <strong>um</strong> registro e devolver sua classe (label predito)</li>
+<li>Implementou a rubrica B, mas o programa compila com warnings ou utiliza variáveis globais sem necessidade</li>
+</ul>
+<h3 id="conceito-b">Conceito <strong>B</strong><a class="headerlink" href="#conceito-b" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Modifique o conceito C para considerar que o programa receba um novo argumento na linha de comando<ul>
+<li><code>-n n_threads</code>: o <strong>predict</strong> deve executar <code>n_threads</code> por vez (<code>n_threads</code> define  a quantidade de threads que devem estar liberadas ao mesmo tempo para fazer <code>predict</code> de um registro/linha da base de dados)</li>
+</ul>
+</li>
+<li>Implementou a rubrica A, mas o programa compila com warnings ou utiliza variáveis globais sem necessidade</li>
+</ul>
+<h3 id="conceito-a">Conceito <strong>A</strong><a class="headerlink" href="#conceito-a" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Modifique o conceito B para criar uma janela gráfica com uma <strong>barra de progresso</strong> das etapas de <strong>predict</strong> (uma para a base de treino e outra para a base de testes). Após terminar, adicione à janela as informações de acurácia</li>
+<li>Criou vídeo de um a três minutos explicando o projeto, mostrando o programa em funcionamento</li>
+</ul>
+<p>Neste conceito você pode utilizar qualquer biblioteca que considerar interessante para a construção do ambiente gráfico, desde utilize a linguagem C. Sugiro o uso da <code>raylib</code>.</p>
+<p>Veja um exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;raylib.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">InitWindow</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;raylib [core] example - basic window&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">WindowShouldClose</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">BeginDrawing</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">ClearBackground</span><span class="p">(</span><span class="n">RAYWHITE</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">DrawText</span><span class="p">(</span><span class="s">&quot;Congrats! You created your first window!&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">190</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">LIGHTGRAY</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">EndDrawing</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">CloseWindow</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Será necessário clonar o repositório da biblioteca, compilar e fazer a instalação.</p>
+<p>Para mais informações, acesse:</p>
+<ul>
+<li><a href="https://github.com/raysan5/raylib">https://github.com/raysan5/raylib</a></li>
+<li><a href="https://www.raylib.com/index.html">https://www.raylib.com/index.html</a></li>
+<li><a href="https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux">https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux</a></li>
+</ul>
+<h3 id="prazo">Prazo:<a class="headerlink" href="#prazo" title="Permanent link">&para;</a></h3>
+<p><a href="../../sobre">Clique aqui!</a>.</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 12, 2022</span>
+      
+    
+  </small>
+</div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../processos/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Immortal" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Immortal
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.85cb4492.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+    
+  </body>
+</html>

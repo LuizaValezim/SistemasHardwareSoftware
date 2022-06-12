@@ -1,0 +1,2 @@
+A função recebe dois ponteiros em que o valor para onde o primeiro será de 3 vezes o primeiro mais 5 vezes o segundo
+e o valor do segundo ponteiro receberá 3 vezes o primeiro mais 12 vezes o valor do segundo.

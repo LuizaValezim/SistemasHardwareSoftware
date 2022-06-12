@@ -1,0 +1,1149 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/processos/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.4">
+    
+    
+      
+        <title>Immortal - Sistemas Hardware-Software - 2022/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#795649">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#immortal" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2022/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2022/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2022/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Immortal
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2022/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2022/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2022/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        Entregas e Prazos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Aulas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Aulas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Aulas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        01 - Inteiros na CPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        02 - Representação de dados em RAM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        03 - Arquitetura x86-64
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        04 -  Funções
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        05 - Condicionais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        06 - Condicionais e funções
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        07 - Loops
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        08 - Variáveis locais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        09 - Array em Assembly
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-revisao/" class="md-nav__link">
+        10 - Revisão
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-malloc/" class="md-nav__link">
+        11 - Alocação Dinâmica de Memória
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        12 - Tipos abstratos de dados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-linux-do-zero/" class="md-nav__link">
+        13 - Linux do Zero
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-processos/" class="md-nav__link">
+        14 - Processos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-exec/" class="md-nav__link">
+        15 - Carregamento de programas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/16-entrada-saida/" class="md-nav__link">
+        16 - Entrada/Saída
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/17-sinais-I/" class="md-nav__link">
+        17 - Enviando sinais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/18-sinais-II/" class="md-nav__link">
+        18 - Capturando sinais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-threads-I/" class="md-nav__link">
+        19 - Concorrência e Threads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/20-sincronizacao/" class="md-nav__link">
+        20 - Sincronização com Mutex
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/21-semaforos/" class="md-nav__link">
+        21 - Semáforos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/22-semaforos-II/" class="md-nav__link">
+        22 - Semáforos II e Modelos de concorrência
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/23-questoes-de-revisao/" class="md-nav__link">
+        22 - Questões de revisão
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Labs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        Hackerlab
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Immortal
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Immortal
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#onde-desenvolver" class="md-nav__link">
+    Onde desenvolver?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    Restrições
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    Avaliação
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-i" class="md-nav__link">
+    Conceito I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-d" class="md-nav__link">
+    Conceito D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    Prazo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threads/" class="md-nav__link">
+        K-Nearest Neighbors Classifier
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#onde-desenvolver" class="md-nav__link">
+    Onde desenvolver?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    Restrições
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    Avaliação
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-i" class="md-nav__link">
+    Conceito I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-d" class="md-nav__link">
+    Conceito D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    Prazo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/Insper/SistemasHardwareSoftware/edit/master/docs/labs/processos.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="immortal">Immortal<a class="headerlink" href="#immortal" title="Permanent link">&para;</a></h1>
+<p>No Lab de <strong>Processos</strong> iremos trabalhar com ferramentas e bibliotecas para criação de um <strong>Monitor de Processos</strong>. Nosso programa, chamado de  <code>immortal</code>, será responsável por subir programas e monitorar seus processos, garantindo que seja reiniciado sempre que finalizado.</p>
+<h2 id="onde-desenvolver">Onde desenvolver?<a class="headerlink" href="#onde-desenvolver" title="Permanent link">&para;</a></h2>
+<p>Foi criado uma pasta <code>lab/02-immortal</code> em seu repositório de entregas da disciplina. Edite o arquivo <code>immortal.c</code> para resolver seu lab!</p>
+<p>Para compilar, utilize obrigatoriamente:</p>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc -Wall -Wno-unused-result -Og -g immortal.c -o immortal
+</code></pre></div>
+
+</div>
+
+<h2 id="restricoes">Restrições<a class="headerlink" href="#restricoes" title="Permanent link">&para;</a></h2>
+<p>Este exercício serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas aos código de vocês:</p>
+<ul>
+<li>todo trabalho com arquivos, processos e sinais deverá ser feito usando as APIs POSIX vistas em aula</li>
+<li>seu programa deverá compilar sem warnings usando as opções <code>-Wall -Wno-unused-result -Og -g</code></li>
+<li>se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</li>
+</ul>
+<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
+<p>O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. Apesar de cada conceito envolver a entrega de uma tab no servidor de testes, a nota final da atividade será o maior conceito implementado, considerando que passou em todos os anteriores. Ex:
+- Se passar na D, não passar na C, passar na B, não passar na A a nota final será D.
+- Se passar na D, C e B, mas não passar na A, a nota final será B.</p>
+<p><strong>Atenção:</strong> Os testes automáticos serão nossa forma principal de avaliação. Entretanto, o professor poderá utilizar processos extras de avaliação, como: entrevistas, revisão manual de código.</p>
+<h3 id="conceito-i">Conceito <strong>I</strong><a class="headerlink" href="#conceito-i" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa não compila</li>
+<li>O programa não implementa algum dos requisitos da rubrica <strong>D</strong>.</li>
+</ul>
+<h3 id="conceito-d">Conceito <strong>D</strong><a class="headerlink" href="#conceito-d" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa compila com warnings.</li>
+<li>O programa roda na linha de comando como abaixo, iniciando o <code>programa</code> apontado em um processo filho.</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>./immortal -p programa
+</code></pre></div>
+
+</div>
+
+<ul>
+<li>Sempre que o processo do <code>programa</code> for finalizado (seja qual for o motivo), o <code>programa</code> deve ser iniciado novamente em um novo processo filho em no máximo 2 segundos.</li>
+<li>Nesta versão não será possível passar argumentos pelo terminal para o <code>programa</code> filho.</li>
+<li>Para entregar, lance uma tag <code>lab2.0.x</code>:</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git tag -a lab2.0.0 -m <span class="s2">&quot;lab2.0.0&quot;</span>
+<span class="gp">$ </span>git push origin lab2.0.0
+</code></pre></div>
+
+</div>
+
+<h3 id="conceito-c">Conceito <strong>C</strong><a class="headerlink" href="#conceito-c" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa compila sem warnings.</li>
+<li>O programa recebe uma flag <code>-f</code> seguida pelo nome de um arquivo de texto (Exemplo: <code>programs.imt</code>). Seu programa deverá ler o arquivo e subir todos os programas nele indicados.</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>./immortal -f programs.imt
+</code></pre></div>
+
+</div>
+
+<ul>
+<li>Cada programa indicado no arquivo deve ser subido em um processo diferente.</li>
+<li>Cada linha do arquivo <code>programs.imt</code> conterá APENAS o path do programa a ser aberto (sem argumentos da linha de comando).</li>
+<li>A funcionalidade <code>-p programa</code> (Conceito D) deverá continuar funcionando.</li>
+<li>Considere que o usuário irá utilizar obrigatoriamente uma das flags <code>-p</code> ou <code>-f</code> (mas não ambas).</li>
+<li>Para entregar, lance uma tag <code>lab2.1.x</code>:</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git tag -a lab2.1.0 -m <span class="s2">&quot;lab2.1.0&quot;</span>
+<span class="gp">$ </span>git push origin lab2.1.0
+</code></pre></div>
+
+</div>
+
+<h3 id="conceito-b"><strong>Conceito B</strong><a class="headerlink" href="#conceito-b" title="Permanent link">&para;</a></h3>
+<!-- - Você deve atualizar a versão C possibilitando indicar no arquivo passado para a flag `-f` (Exemplo: `programs.imt`) argumentos para cada programa a ser monitorado.
+- Cada linha do arquivo `programs.imt` conterá o path do programa a ser aberto E seus argumentos da linha de comando. -->
+<ul>
+<li>Ao apertar Ctrl+C o programa <code>immortal</code> pergunta se o usuário deseja realmente sair. Se <code>Y</code> ou <code>y</code>, todos os processos filhos são encerrados <strong>antes</strong> que o pai encerre (envie sinal). <strong>OBS:</strong> a entrada do usuário deve ser obrigatoriamente <code>Y</code> ou <code>y</code>. Caso contrário, ignore e continue.</li>
+<li>As funcionalidades das versões anteriores devem continuar disponíveis.</li>
+<li>Para entregar, lance uma tag <code>lab2.2.x</code>:</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git tag -a lab2.2.0 -m <span class="s2">&quot;lab2.2.0&quot;</span>
+<span class="gp">$ </span>git push origin lab2.2.0
+</code></pre></div>
+
+</div>
+
+<h3 id="conceito-a">Conceito <strong>A</strong><a class="headerlink" href="#conceito-a" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa recebe uma flag <code>-l</code> (<em>L minúsculo</em>) seguido do path de um arquivo. Você deve gerar um log neste arquivo.</li>
+<li>Caso o arquivo de log não exista, crie. Se já existir, adicione novos logs no final, sem sobrescrever.</li>
+<li>Obs: ao receber um CTRL+C (SIG_INT), ao sair do immortal não precisa incluir no log a finalização dos processos filhos.</li>
+<li>As funcionalidades das versões anteriores devem continuar disponíveis.</li>
+<li>Considere que o usuário irá utilizar obrigatoriamente uma das flags <code>-p</code> ou <code>-f</code> (mas não ambas). Já o uso da flag <code>-l</code> será opcional.</li>
+<li>As flags podem ser utilizadas em qualquer ordem: <code>./immortal -f programs.imt -l mylog.log</code> ou <code>./immortal -l mylog.log -f programs.imt</code>.</li>
+<li>
+<p>As mensagens do log devem seguir o padrão (uma linha por evento, mantenha a mesma mensagem - <strong>exatamente igual</strong> - alterando apenas os PIDs e valores retornados após WAIT):
+<div class="highlight"><pre><span></span><code>starting ./infinito (pid=184085)
+starting ./timecrash (pid=184086)
+starting ./timetogo (pid=184088)
+program ./timecrash (pid=184086) finished (EXITED=0, EXITSTATUS=0, SIGNALED=1, SIGNAL=8, SIGNALSTR=Floating point exception)
+restarting ./timecrash (oldpid=184086, newpid=184094)
+program ./timetogo (pid=184088) finished (EXITED=1, EXITSTATUS=0, SIGNALED=0, SIGNAL=0, SIGNALSTR=Unknown signal 0)
+restarting ./timetogo (oldpid=184088, newpid=184129)
+program ./timecrash (pid=184094) finished (EXITED=0, EXITSTATUS=0, SIGNALED=1, SIGNAL=8, SIGNALSTR=Floating point exception)
+restarting ./timecrash (oldpid=184094, newpid=184131)
+</code></pre></div></p>
+</li>
+<li>
+<p>Exemplo de uso:</p>
+</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>./immortal -f programs.imt -l mylog.log
+</code></pre></div>
+
+</div>
+<ul>
+<li>Para entregar, lance uma tag <code>lab2.3.x</code>:</li>
+</ul>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git tag -a lab2.3.0 -m <span class="s2">&quot;lab2.3.0&quot;</span>
+<span class="gp">$ </span>git push origin lab2.3.0
+</code></pre></div>
+
+</div>
+
+<h3 id="prazo">Prazo:<a class="headerlink" href="#prazo" title="Permanent link">&para;</a></h3>
+<p><a href="../../sobre">Clique aqui!</a>.</p>
+<!-- 
+## Gabarito
+Para facilitar o desenvolvimento do projeto, fornecemos executáveis que implementam cada versão solicitada nos labs. Eles estão disponíveis no seu repositório de atividades na pasta `lab\02-immortal\tests\util\gabarito\lab2.x.x`.
+
+Confira nas próximas sub-seções exemplos de uso!
+
+## Rubrica D: tag **lab2.0.x**
+
+## Rubrica C: tag **lab2.1.x**
+
+## Rubrica B: tag **lab2.2.x**
+
+## Rubrica A: tag **lab2.3.x**
+ -->
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 12, 2022</span>
+      
+    
+  </small>
+</div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../hackerlab/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hackerlab" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Hackerlab
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../threads/" class="md-footer__link md-footer__link--next" aria-label="Next: K-Nearest Neighbors Classifier" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              K-Nearest Neighbors Classifier
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.85cb4492.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+    
+  </body>
+</html>
